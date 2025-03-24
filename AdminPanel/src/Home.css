@@ -1,0 +1,16 @@
+.about-us
+{
+    text-align: justify;
+    align-items: center;
+    border: 3px solid silver;
+    padding: 2%;
+    margin: 2rem 10rem;
+    line-height: 1.5;
+    font-size: 1.13rem
+}
+
+.title-home
+{
+    margin-top: 2rem;
+    text-align: center;
+}
