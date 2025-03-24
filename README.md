@@ -1,4 +1,4 @@
-# MERN Stack Login, Register, and Admin Panel
+# Connector
 
 This is a full-stack web application that includes user authentication (login and registration) and an admin panel using the MERN stack (MongoDB, Express.js, React.js, Node.js). It provides a foundation for building secure user authentication systems and an admin interface in your projects.
 
