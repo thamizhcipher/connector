@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Container, Alert } from "react-bootstrap";
 import NavigationBar from "./CustomNavbar";
+import axios from "axios";
 const Certificate = () => {
   const [formData, setFormData] = useState({
     certificateDetails: "",
@@ -37,26 +38,38 @@ const Certificate = () => {
   };
 
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!formData.file) {
       setError("Please attach a valid file before submitting.");
       return;
     }
-
-    console.log("Form Submitted:", formData);
-    alert("Certificate details submitted successfully!");
-
-    // Reset form
-    setFormData({
-      certificateDetails: "",
-      name: "",
-      date: "",
-      place: "",
-      file: null,
-    });
+  
+    const formDataToSend = new FormData();
+    formDataToSend.append("certificateDetails", formData.certificateDetails);
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("date", formData.date);
+    formDataToSend.append("place", formData.place);
+    formDataToSend.append("file", formData.file);
+  
+    try {
+      console.log("wofc");
+      
+      const response = await axios.post("http://localhost:4000/uploadcertificate", formDataToSend, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      console.log("sdf");
+      
+      alert(response.data.message);
+      setFormData({ certificateDetails: "", name: "", date: "", place: "", file: null });
+    } catch (error) {
+      console.log(error);
+      
+      setError(error.response?.data?.error);
+    }
   };
+  
 
   return (
     <>

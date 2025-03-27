@@ -8,9 +8,13 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 500px;
-    margin: auto;
+    margin: 2rem auto;
+    border: 3px solid silver;
+    width: 50%;
+}
+.container-signin label {
+    color:white;
+    font-weight: 400;
 }
 
 .container-signin form {
@@ -19,7 +23,6 @@ body {
     border: 1px solid #090404;
     padding: 20px;
     border-radius: 5px;
-    background: #fff;
     padding: 0px 60px;
     border-radius: 6px;
     -webkit-border-radius: 6px;
@@ -63,7 +66,7 @@ button:hover{
 
 .ui.form {
     max-width: 300px; 
-    margin: 0 auto;
+    margin: 1rem auto;
 }
 
 

@@ -3,7 +3,8 @@ import { Link } from 'react-router-dom'
 import './Signin.css'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
-
+import NavigationBar from './CustomNavbar';
+import { Button } from 'react-bootstrap';
 function Signin() {
 
     let date = new Date().getFullYear();
@@ -13,6 +14,7 @@ function Signin() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [role, setRole] = useState('student');
 
 
     const navigate = useNavigate();
@@ -23,16 +25,18 @@ function Signin() {
         try {
             const response = await axios.post('http://localhost:4000/register', { firstName,lastName,phoneNumber, email, password });
             console.log('Registration successful:', response.data);
-            navigate('/login');
+            
         } catch (error) {
             console.error('Registration failed:', error);
         }
     };
 
     return (
+        <>
+            <NavigationBar />
+        
         <div className="container-signin">
             <form onSubmit={handleSubmit}>
-                <h1>Register</h1>
                 <div className="ui form">
                     <div className="field">
                         <label>First Name</label>
@@ -89,14 +93,26 @@ function Signin() {
                             }}
                         />
                     </div>
-                    <button type='submit' className="fluid ui button blue">Submit</button>
+                    <div className="field">
+                        <label>Role</label>
+                        <select style={{width:"50%"}}
+                            name="role"
+                            value={role}
+                            onChange={(e) => setRole(e.target.value)}
+                        >
+                            <option value="">Select Role</option> 
+                            <option value="admin">Admin</option>
+                            <option value="student">Student</option>
+                        </select>
+                     </div>
+                     <Button variant="success" type="submit" style={{width:"35%"}} className="mt-3 course-btn">
+                       Submit
+                    </Button>
                 </div>
             </form>
-            <Link to="/login" style={{fontSize:"18PX",fontWeight:"800",color:"black",marginTop:"5px"}}>
-                Already have an account
-            </Link>
+           
         </div>
-
+        </>
     )
 }
 

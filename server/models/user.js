@@ -37,7 +37,8 @@ const userSchema = new Schema({
         type: String,
         trim: true,
         required: true
-    }
+    },
+    role: { type: String, enum: ["admin", "user"], default: "user" }
 });
 
 userSchema.statics.findByCredentials = async (email,password) => {

@@ -10,7 +10,11 @@ router.post("/login", async (req, res) => {
         console.log(req.body);
         const user = await User.findByCredentials(req.body.email,req.body.password);
 
-        res.send(user);
+        res.json({ 
+            _id: user._id, 
+            email: user.email, 
+            role: user.role 
+        });
     } catch (error) {
         res.status(401).send(error);
         console.log(error.message);
@@ -38,19 +42,17 @@ router.post("/login", async (req, res) => {
 
 
 router.post("/register", async (req, res) => {
+    const { firstName, lastName, phoneNumber, email, password, role } = req.body;
 
-    console.log(req.body);
-    const user = new User(req.body);
+    const validRole = role === "admin" ? "admin" : "user";
+
+    const user = new User({ firstName, lastName, phoneNumber, email, password, role: validRole });
 
     try {
-
         await user.save();
-        res.status(201).send(user);
-
+        res.status(201).json({ message: "User registered successfully", user });
     } catch (error) {
-
-        res.status(400).send(error);
-
+        res.status(400).json({ error: error.message });
     }
 });
 

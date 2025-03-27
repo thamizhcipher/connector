@@ -17,10 +17,16 @@ function Login() {
 
         try {
             const response = await axios.post('http://localhost:4000/login', { email, password });
-            console.log('Registration successful:', response.data);
-            navigate('/home');
+            const { role } = response.data;
+            console.log('Login successful:', response.data);
+            localStorage.setItem('role', response.data.role);
+            if (role === "admin") {
+                navigate('/admin-dashboard'); // Redirect admin
+            } else {
+                navigate('/home'); // Redirect regular user
+            }
         } catch (error) {
-            console.error('Registration failed:', error);
+            console.error('Login failed:', error);
         }
     };
 
@@ -28,7 +34,7 @@ function Login() {
 
     return (
         <>
-                    <h4 style={{fontWeight:"bold",letterSpacing:"2px",textAlign:"center",marginTop:"3rem"}}>Welcome to CONNECTOR</h4>
+        <h4 style={{fontWeight:"bold",letterSpacing:"2px",textAlign:"center",marginTop:"3rem"}}>Welcome to CONNECTOR</h4>
         <div className="container" style={{margin:"3rem auto",border:"3px solid white",padding:"1%",maxWidth:"500px"}}>
 
             <form style={{height:"500px"}} onSubmit={handleSubmit}>

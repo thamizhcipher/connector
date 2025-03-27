@@ -1,0 +1,25 @@
+.form-container
+{
+    width:55% ;
+    border: 3px solid silver;
+    border-radius: 5px;
+    padding: 2%;
+}
+.form-container label
+{
+   color: white;
+   font-weight: 400;
+}
+
+.course-btn
+{
+    width: 30%;
+    background-color: #007bff;
+    align-items: center;
+}
+.course-btn:hover
+{
+    width: 30%;
+    background-color: #007bff;
+    align-items: center;
+}
